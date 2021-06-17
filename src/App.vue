@@ -176,16 +176,16 @@ export default {
       smallTable: false,
       disableButton: false,
       addNewRowForm: {
-        firstName: "",
-        lastName: "",
-        email: "",
+        firstName: "dfd",
+        lastName: "dfd",
+        email: "dfdf@gmail.com",
         phone: "",
         id: 1,
-        streetAddress: "",
-        city: "",
-        state: "",
-        zip: "",
-        description: ""
+        streetAddress: "dfgdfg",
+        city: "dfgdfg",
+        state: "GH",
+        zip: "55555",
+        description: "dfgdfg"
       },
       search: "",
       rules: {
@@ -247,7 +247,7 @@ export default {
     addRow(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.pagedTableData.unshift({
+          const newRow = {
             id: this.addNewRowForm.id,
             firstName: this.addNewRowForm.firstName,
             lastName: this.addNewRowForm.lastName,
@@ -260,8 +260,8 @@ export default {
               state: this.addNewRowForm.state,
               zip: this.addNewRowForm.zip
             }
-          });
-          console.log(this.pagedTableData);
+          };
+          this.info.unshift(newRow);
           this.$notify.success({
             title: "Успешно",
             message: "Новая запись успешно добавлена!"
@@ -286,8 +286,7 @@ export default {
           "http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"
         )
         .then(response => {
-          console.log(response.data),
-            (this.info = response.data.sort((a, b) => (a.id > b.id ? 1 : -1)));
+          this.info = response.data.sort((a, b) => (a.id > b.id ? 1 : -1));
         })
         .catch(error => {
           this.$notify.error({
@@ -310,8 +309,7 @@ export default {
           "http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}"
         )
         .then(response => {
-          console.log(response.data),
-            (this.info = response.data.sort((a, b) => (a.id > b.id ? 1 : -1)));
+          this.info = response.data.sort((a, b) => (a.id > b.id ? 1 : -1));
         })
         .catch(error => {
           this.$notify.error({
@@ -329,8 +327,7 @@ export default {
         this.pageSize * this.page
       );
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 <style lang="scss">
